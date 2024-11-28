@@ -6,15 +6,15 @@ Component({
   relations: {
     '../scroll-page/index': {
       type: 'child',
-      linked: function (target) {},
+      linked: function (target) { },
     },
     '../nav/index': {
       type: 'child',
-      linked: function (target) {},
+      linked: function (target) { },
     },
     '../empty/index': {
       type: 'child',
-      linked: function (target) {},
+      linked: function (target) { },
     },
     '../refresh/index': {
       type: 'child',
@@ -97,30 +97,32 @@ Component({
     setWapHeight() {
       const that = this
       const query = that.createSelectorQuery().in(this)
-      query
-        .select('#content')
-        .boundingClientRect(function (res) {
-          if (res) {
-            that.setData({
-              contentHeight: res.height,
-            })
+      setTimeout(() => {
+        query
+          .select('#content')
+          .boundingClientRect(function (res) {
+            if (res) {
+              that.setData({
+                contentHeight: res.height,
+              })
 
-            that.triggerEvent('contentHeight', res.height)
-          }
-        })
-        .select('#header')
-        .boundingClientRect(function (headerRes) {
-          if (headerRes) {
-            that.setData({
-              contentHeight: that.data.contentHeight - headerRes.height,
-            })
-            that.triggerEvent(
-              'contentHeight',
-              that.data.contentHeight - headerRes.height
-            )
-          }
-        })
-        .exec()
+              that.triggerEvent('contentHeight', res.height)
+            }
+          })
+          .select('#header')
+          .boundingClientRect(function (headerRes) {
+            if (headerRes) {
+              that.setData({
+                contentHeight: that.data.contentHeight - headerRes.height,
+              })
+              that.triggerEvent(
+                'contentHeight',
+                that.data.contentHeight - headerRes.height
+              )
+            }
+          })
+          .exec()
+      }, 100)
     },
     debounce(fn, wait) {
       const that = this

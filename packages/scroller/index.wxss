@@ -4,6 +4,10 @@
   height : 100%;
 }
 
+.scroll{
+  height: 100%;
+}
+
 .refresh-container {
   width: 100%;
 }
